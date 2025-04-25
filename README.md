@@ -26,7 +26,7 @@ http://localhost:5000
 - Jucatorii se inregistreaza cu:
 - username
 - rank (1–10)
-- harti preferate (ex: Mirage, Dust2 etc.)
+- harti preferate (ex: Mirage, Dust2 etc...)
 
 - Aplicatia cauta un adversar cu acelasi rank si cel putin o harta comuna.
 
