@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <title>🎮 Matchmaking finder</title>
+  </head>
+  <body>
+    <h1>🎮 Matchmaking System</h1>
+
+    <!-- formularul pentru inregistrarea unui nou jucator -->
+    <form method="post">
+      <!-- ascundem inputul actiunii ca sa stim ce tip de actiune a facut userul -->
+      <input type="hidden" name="action" value="register" />
+
+      <!-- aici se introduce numele utilizatorului -->
+      <label>Nume utilizator:</label><br />
+      <input type="text" name="username" required /><br /><br />
+
+      <!-- lista dropdown pt rankuri-->
+      <label>Rank:</label><br />
+      <select name="rank">
+        <!-- pt fiecare rank din lista trimisa de backend, adaugam o optiune -->
+        {% for r in ranks %}
+        <option value="{{ r }}">{{ r }}</option>
+        {% endfor %}</select
+      ><br /><br />
+
+      <!-- select hartile preferate folosind checkbox-uri -->
+      <label>Harți preferate:</label><br />
+      {% for m in maps %}
+      <input type="checkbox" name="maps" value="{{ m }}" /> {{ m }}<br />
+      {% endfor %}<br />
+
+      <!-- un buton care trimite toate datele de mai sus spre "server" -->
+      <button type="submit">Inregistreaza jucator</button>
+    </form>
+
+    <hr />
+
+    <!-- formularul pentru cautarea unui adversar pe baza username-ului -->
+    <form method="post">
+      <input type="hidden" name="action" value="match" />
+      <label>Nume utilizator:</label><br />
+      <input type="text" name="username" required /><br /><br />
+      <button type="submit">Cauta un adversar</button>
+    </form>
+
+    <hr />
+
+    <!-- salvare si incarcare din CSV -->
+    <form method="post">
+      <button name="action" value="save">💾 Salveaza in CSV</button>
+      <button name="action" value="load">📂 Incarca din CSV</button>
+    </form>
+
+    <!-- debugging, in cazul in care apare vreun mesaj de eroare sa fie afisat -->
+    {% if message %}
+    <p><strong>{{ message }}</strong></p>
+    {% endif %}
+
+    <!-- daca a fost gasit un adversar, il afisam aici -->
+    {% if match %}
+    <p>🎯 Match gasit: {{ match }}</p>
+    {% endif %}
+  </body>
+</html>
